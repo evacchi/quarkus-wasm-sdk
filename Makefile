@@ -5,9 +5,9 @@ build: hello-world/main.go basic-auth/main.go
 
 test: build
 	extism call hello-world/hello-world.wasm request_headers \
-		--input '{"headers":{"Content-Type":["application/json"]}}' --wasi
-		
-	extism call fortunes/fortunes.wasm request_headers \
+		--input '{"status":{"code":200,"message":"ok"},"headers":{"Content-Type":["application/json"]}}' --wasi
+
+	extism call fortunes/fortunes.wasm response_headers \
 		--input '{"headers":{"Content-Type":["application/json"]}}' --wasi
 
 	extism call basic-auth/basic-auth.wasm request_headers \

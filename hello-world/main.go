@@ -11,6 +11,8 @@ func (h *HelloWorldPlugin) OnRequestHeaders(req *sdk.Request) error {
 	return nil
 }
 
+func (h *HelloWorldPlugin) OnResponseHeaders(resp *sdk.Response) error { return nil }
+
 func init() {
 	sdk.SetPlugin(&HelloWorldPlugin{})
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/base64"
-	"fmt"
 	"github.com/evacchi/quarkus-wasm-sdk/sdk"
 	"strings"
 )
@@ -24,12 +23,14 @@ func (h *BasicAuthPlugin) OnRequestHeaders(req *sdk.Request) error {
 				delete(req.Headers, "Authorization")
 				req.Headers["X-Authorized"] = []string{userPwd[1]}
 			} else {
-				return fmt.Errorf("invalid authorization header %s", pair)
+				req.Abort(403, "Forbidden.")
 			}
 		}
 	}
 	return nil
 }
+
+func (h *BasicAuthPlugin) OnResponseHeaders(resp *sdk.Response) error { return nil }
 
 func init() {
 	sdk.SetPlugin(&BasicAuthPlugin{})

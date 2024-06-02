@@ -13,11 +13,13 @@ var fortunes string
 
 type FortunesPlugin struct{}
 
-func (h *FortunesPlugin) OnRequestHeaders(req *sdk.Request) error {
+func (h *FortunesPlugin) OnRequestHeaders(req *sdk.Request) error { return nil }
+
+func (h *FortunesPlugin) OnResponseHeaders(resp *sdk.Response) error {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	lines := strings.Split(fortunes, "\n")
 	l := r.Intn(len(lines))
-	req.AppendHeaders("X-Fortune-Plugin", lines[l])
+	resp.AppendHeaders("X-Fortune-Plugin", lines[l])
 	return nil
 }
 
