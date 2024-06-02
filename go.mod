@@ -1,4 +1,4 @@
-module github.com/extism/go-pdk-template
+module github.com/evacchi/quarkus-wasm-sdk
 
 go 1.21.0
 
